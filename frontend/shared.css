@@ -1,0 +1,57 @@
+/* Temas claro / oscuro y animaciones del logo. Compartido por la ventana principal y la burbuja. */
+:root, :root[data-theme="light"] {
+  --bg: #eef3fb;
+  --bg-grad: radial-gradient(1200px 600px at 85% -10%, #dbe9ff 0%, transparent 60%), linear-gradient(160deg, #f4f8ff 0%, #e8f0fb 100%);
+  --side: #f9fbff;
+  --panel: #ffffff;
+  --panel-2: #ffffff;
+  --card: #ffffff;
+  --line: #d3deef;
+  --text: #0f2a4d;
+  --muted: #5f7190;
+  --accent: #1673e6;
+  --accent-2: #19a2ff;
+  --on-accent: #ffffff;
+  --user: #dceaff;
+  --glow: rgba(25, 130, 255, .30);
+  --shadow: 0 8px 30px rgba(24, 70, 140, .10);
+  --ok: #1e9e5a;
+  --warn: #d98a00;
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  --bg: #060f22;
+  --bg-grad: radial-gradient(900px 520px at 80% -5%, rgba(20, 110, 255, .28) 0%, transparent 62%),
+             radial-gradient(700px 500px at 0% 100%, rgba(10, 70, 190, .22) 0%, transparent 60%),
+             linear-gradient(160deg, #07142e 0%, #050c1c 100%);
+  --side: rgba(8, 18, 40, .72);
+  --panel: rgba(14, 28, 58, .70);
+  --panel-2: rgba(16, 34, 70, .65);
+  --card: rgba(16, 34, 70, .45);
+  --line: rgba(60, 130, 235, .28);
+  --text: #f2f7ff;
+  --muted: #8fa7ca;
+  --accent: #1e9bff;
+  --accent-2: #18c6ff;
+  --on-accent: #ffffff;
+  --user: rgba(30, 110, 230, .35);
+  --glow: rgba(30, 155, 255, .50);
+  --shadow: 0 10px 34px rgba(0, 10, 40, .55);
+  --ok: #3ddc84;
+  --warn: #ffb020;
+  color-scheme: dark;
+}
+
+/* ---------- Logo animado según el estado de ánimo ---------- */
+.logo { width: 100%; height: 100%; object-fit: contain; display: block; user-select: none; -webkit-user-drag: none;
+  animation: float 3.4s ease-in-out infinite; }
+.logo[data-mood="happy"]     { animation: hop 1.1s ease-in-out infinite; }
+.logo[data-mood="thinking"]  { animation: think 1.3s ease-in-out infinite; }
+.logo[data-mood="surprised"] { animation: pop .5s ease-out 1, float 3.4s ease-in-out .5s infinite; }
+.logo[data-mood="sleepy"]    { animation: float 7s ease-in-out infinite; opacity: .75; filter: saturate(.7); }
+@keyframes float { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-6px) } }
+@keyframes hop   { 0%,100% { transform: translateY(0) scale(1) } 40% { transform: translateY(-9px) scale(1.04) } }
+@keyframes think { 0%,100% { transform: scale(1);    filter: drop-shadow(0 0 0 var(--glow)) }
+                   50%     { transform: scale(1.05); filter: drop-shadow(0 0 16px var(--glow)) } }
+@keyframes pop   { 0% { transform: scale(.9) } 60% { transform: scale(1.12) } 100% { transform: scale(1) } }
+@media (prefers-reduced-motion: reduce) { .logo { animation: none !important; } }
